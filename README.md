@@ -13,7 +13,7 @@ The first thing to do is get the basics of the main models working. Each model h
 The requirements for each model are that they can accept a `name` upon initialization and set that property correctly. The `name` property should be readable and writable by the object.
 
 ```ruby
-Song.new("Blank Space").name #=> "Blank Space"`
+Song.new("Blank Space".name #=> "Blank Space"`
 ```
 
 Additionally, *each* class should contain a class variable `@@all` that is set to an empty array and is prepared to store all saved instances of the class. This class variable should be accessible via the class method `.all`.
@@ -27,14 +27,14 @@ Artist.all #=> []
 Instances should respond to a `#save` method that adds the instance itself into the appropriate `@@all` class variable.
 
 ```ruby
-Song.new("Blank Space").save
+Song.new("Blank Space".save
 Song.all #=> [#<Song: @name="Blank Space">]
 ```
 
 The class should be able to empty its `@@all` array via a class method `.destroy_all`.
 
 ```ruby
-Song.new("Kaohsiung Christmas").save
+Song.new("Kaohsiung Christmas".save
 Song.all #=> [#<Song: @name="Blank Space">, #<Song: @name="Kaohsiung Christmas">]
 Song.destroy_all
 Song.all #=> []
@@ -43,9 +43,9 @@ Song.all #=> []
 Finally, all classes should implement a custom constructor `.create` that instantiates an instance using `.new` but also invokes `#save` on that instance, forcing it to persist immediately.
 
 ```ruby
-Song.new("Blank Space")
+Song.new("Blank Space"
 Song.all #=> []
-Song.create("Blank Space")
+Song.create("Blank Space"
 Song.all #=> [#<Song: @name="Blank Space">]
 ```
 
@@ -66,7 +66,7 @@ Song.all #=> [#<Song: @name="Blank Space">]
 
 ***Note:*** there are a few tests concerned with switching the `Song#initialize` method from setting instance variables for `@artist` and `@genre` to using the custom setter methods that you define (e.g., `Song#genre=`). We want to use the custom setter methods because they keep our associations in sync. For example, when we call our custom `Song#artist=` method, it sets the song's `@artist` property _and_ adds the song to the artist's collection of songs. When you reach these tests, make sure those setter methods are only invoked _if_ `Song#initialize` is called with artist and/or genre arguments. Otherwise, the `@artist` and/or `@genre` properties will be initialized as `nil`, and you'll have some unexpected consequences in both your code and the test suite.
   * If we call `Song.new("Song Title", artist_object, genre_object)`, both `Song#artist=` and `Song#genre=` should be invoked.
-  * If we call `Song.new("This Song Has No Artist or Genre")`, neither `Song#artist=` nor `Song#genre=` should be invoked.
+  * If we call `Song.new("This Song Has No Artist or Genre"`, neither `Song#artist=` nor `Song#genre=` should be invoked.
 
 ## Finding
 
